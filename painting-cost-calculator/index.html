@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Painting Cost Calculator | HomeRepairCalc</title>
+    <meta
+      name="description"
+      content="Estimate painting repair and repainting costs for rooms, trim, doors, cabinets, touch-ups, and exterior paint repairs."
+    />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/assets/img/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="64x64"
+      href="/assets/img/favicon-64.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/img/favicon-180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="512x512"
+      href="/assets/img/favicon-512.png"
+    />
+
+    <link
+      rel="canonical"
+      href="https://homerepaircalc.com/painting-cost-calculator/"
+    />
+
+    <!-- Main CSS pointer -->
+    <link rel="stylesheet" href="/assets/css/style-v1.css" />
+    <link rel="stylesheet" href="/assets/css/calculator-repair-cost.css" />
+  </head>
+
+  <body>
+    <!-- ================= HEADER ================= -->
+    <header class="site-header">
+      <div class="header-container">
+        <div class="logo">
+          <a href="/" aria-label="HomeRepairCalc home">
+            <span class="logo-word-home">HomeRepair</span
+            ><span class="logo-word-calc">Calc</span>
+          </a>
+        </div>
+
+        <nav class="nav-desktop">
+          <ul>
+            <li><a href="/calculators/">Estimators</a></li>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/faq/">FAQ</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+
+        <button
+          class="hamburger"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobileNav"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="nav-mobile" id="mobileNav" hidden>
+        <ul>
+          <li><a href="/calculators/">Estimators</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/about/">About</a></li>
+          <li><a href="/faq/">FAQ</a></li>
+          <li><a href="/contact/">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- ================= MAIN ================= -->
+    <main class="calculator-page">
+      <nav class="hub-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        <span aria-hidden="true">/</span>
+        <a href="/calculators/">Estimators</a>
+        <span aria-hidden="true">/</span>
+        <span>Painting Cost</span>
+      </nav>
+
+      <section class="calculator-hero">
+        <h1>Painting Cost Calculator</h1>
+        <p class="subtitle">
+          Estimate a practical cost range for common painting repairs,
+          touch-ups, and repainting jobs
+        </p>
+
+        <p class="note">
+          Painting costs change with prep work, wall condition, paint quality,
+          trim detail, ceiling height, and whether old paint or texture must be
+          blended
+        </p>
+      </section>
+
+      <section class="calculator-card">
+        <form id="repair-cost-form">
+          <input type="hidden" id="repair-category" value="painting" />
+
+          <div class="form-group">
+            <label for="repair-job">Painting job type</label>
+            <select id="repair-job" required>
+              <option value="">Select painting job</option>
+              <option value="room-repaint">Interior room repaint</option>
+              <option value="paint-touch-up">
+                Paint touch up and blending
+              </option>
+              <option value="trim-door-paint">Trim or door painting</option>
+              <option value="cabinet-painting">Cabinet painting</option>
+              <option value="exterior-touch-up">Exterior paint repair</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="job-size">Job size</label>
+            <select id="job-size" required>
+              <option value="">Select size</option>
+              <option value="small">Small / simple access</option>
+              <option value="medium">Medium / typical job</option>
+              <option value="large">Large / harder prep</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="market-level">Local labor market</label>
+            <select id="market-level" required>
+              <option value="average">Average cost area</option>
+              <option value="lower">Lower cost area</option>
+              <option value="higher">Higher cost metro area</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="home-type">Home type</label>
+            <select id="home-type" required>
+              <option value="house">House</option>
+              <option value="apartment">Apartment / condo</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="urgency">Urgency</label>
+            <select id="urgency" required>
+              <option value="normal">Normal scheduling</option>
+              <option value="urgent">Urgent / after hours risk</option>
+            </select>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" id="calculate-btn">Estimate cost</button>
+            <button type="reset" class="secondary">Clear</button>
+          </div>
+
+          <p class="form-feedback" id="form-feedback" hidden></p>
+        </form>
+      </section>
+
+      <section class="result-card" id="result-card" hidden>
+        <h2>Your estimated painting cost range</h2>
+
+        <ul class="results-list">
+          <li>
+            <strong>Estimated total:</strong>
+            <span id="result-total">—</span>
+          </li>
+          <li>
+            <strong>Labor estimate:</strong>
+            <span id="result-labor">—</span>
+          </li>
+          <li>
+            <strong>Materials estimate:</strong>
+            <span id="result-materials">—</span>
+          </li>
+          <li>
+            <strong>Typical job time:</strong>
+            <span id="result-time">—</span>
+          </li>
+          <li>
+            <strong>DIY vs professional:</strong>
+            <span id="result-recommendation">—</span>
+          </li>
+        </ul>
+
+        <div class="safety-box">
+          <strong>Important note</strong>
+          <p id="result-note">
+            This estimate does not include lead paint testing, major drywall
+            repair, mold cleanup, full exterior restoration, or structural
+            moisture problems
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <a href="/" class="footer-logo" aria-label="HomeRepairCalc home">
+              <span class="footer-logo-home">HomeRepair</span
+              ><span class="footer-logo-calc">Calc</span>
+            </a>
+            <p class="footer-subtitle">
+              Home repair cost estimators and practical repair guides for
+              homeowners.
+            </p>
+            <div class="footer-social">
+              <a
+                href="mailto:support@homerepaircalc.com"
+                aria-label="Contact HomeRepairCalc by email"
+              >
+                <img
+                  src="/assets/img/footer-icons/email-icon.png"
+                  alt="Email"
+                  class="footer-social-img"
+                />
+              </a>
+            </div>
+          </div>
+
+          <div class="footer-column">
+            <h3>Estimators</h3>
+            <ul>
+              <li><a href="/calculators/">All Estimators</a></li>
+              <li><a href="/blog/">Blog</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Guides</h3>
+            <ul>
+              <li><a href="/plumbing-repair-guide/">Plumbing Repair</a></li>
+              <li>
+                <a href="/electrical-repair-guide/">Electrical Repair</a>
+              </li>
+              <li><a href="/drywall-repair-guide/">Drywall Repair</a></li>
+              <li><a href="/painting-cost-guide/">Painting Cost</a></li>
+              <li><a href="/roof-repair-guide/">Roof Repair</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Company</h3>
+            <ul>
+              <li><a href="/about/">About</a></li>
+              <li><a href="/contact/">Contact</a></li>
+              <li><a href="/faq/">FAQ</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-column">
+            <h3>Legal</h3>
+            <ul>
+              <li><a href="/privacy/">Privacy Policy</a></li>
+              <li><a href="/terms/">Terms of Use</a></li>
+              <li><a href="/disclaimer/">Disclaimer</a></li>
+              <li><a href="/cookies/">Cookie Policy</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© <span id="year"></span> HomeRepairCalc. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ================= JS ================= -->
+    <script src="/assets/js/main.js"></script>
+    <script src="/assets/js/data/repair-cost-data.js"></script>
+    <script src="/assets/js/data/region-multipliers.js"></script>
+    <script src="/assets/js/data/urgency-modifiers.js"></script>
+    <script src="/assets/js/calculators/repair-cost.js"></script>
+  </body>
+</html>
